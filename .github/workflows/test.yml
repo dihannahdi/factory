@@ -1,0 +1,33 @@
+name: test
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  engine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq jq
+      - run: bash orchestrator/test/run-all.sh
+  console:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: console/web/package-lock.json
+      - run: npm test
+        working-directory: console
+      - run: npm ci --no-audit --no-fund
+        working-directory: console/web
+      - run: npm run check && npm test && npm run build
+        working-directory: console/web
+      # After the build: the demo test needs console/public, and is skipped without it.
+      - run: node --test bin/test/*.test.mjs

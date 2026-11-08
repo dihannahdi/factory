@@ -1,0 +1,8 @@
+[Unit]
+Description=factory lane 4 sandboxes (the blog instance's slot)
+Before=slices.target
+
+# No limits of its own: the per-sandbox limits are in sandbox.sh, the shared ones in factory.slice,
+# which these lanes count against together with the first instance's.
+# This file exists so the nesting under factory.slice is declared, not inferred.
+[Slice]

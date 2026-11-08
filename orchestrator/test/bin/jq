@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Test shim: the Windows jq.exe ends lines with CRLF, which Linux's never does and which breaks
+# `mapfile -t` and string comparisons. Strip the CRs; keep jq's exit status.
+real=$(PATH=${PATH#*:} command -v jq)
+"$real" "$@" | tr -d '\r'
+exit "${PIPESTATUS[0]}"

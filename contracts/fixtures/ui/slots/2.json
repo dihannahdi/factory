@@ -1,0 +1,73 @@
+{
+ "v": 1,
+ "slot": 2,
+ "run_id": "7c2e9a4b1d3f5e7a9b0c2d4e6f8a1b3c",
+ "state": "running",
+ "stage": "ci",
+ "sub": "",
+ "issue": {
+  "n": 26,
+  "title": "[OUT-01] Category tree with drag to reorder (epic)",
+  "tag": "OUT-01",
+  "family": "OUT",
+  "url": "https://github.com/acme/shop/issues/26"
+ },
+ "pr": {
+  "n": 140,
+  "url": "https://github.com/acme/shop/pull/140",
+  "head": "9c1e7d2b5a4f"
+ },
+ "model": "opencode/deepseek-v4.1-flash-free",
+ "session": "ses_ebcb9a11c2ffeAbCdEfGh12345",
+ "turn": null,
+ "stage_started": 1792129713,
+ "issue_started": 1792124823,
+ "tokens": {
+  "input": 240511,
+  "output": 30112,
+  "reasoning": 18800,
+  "cache_read": 6120441
+ },
+ "requirements": {
+  "total": 7,
+  "done": 7
+ },
+ "ci": {
+  "head": "9c1e7d2b5a4f",
+  "checks": [
+   {
+    "name": "Build and test",
+    "status": "in_progress",
+    "conclusion": null
+   },
+   {
+    "name": "Integration tests",
+    "status": "completed",
+    "conclusion": "success"
+   },
+   {
+    "name": "Lint",
+    "status": "completed",
+    "conclusion": "skipped"
+   }
+  ]
+ },
+ "steer": {
+  "pending": null,
+  "last": {
+   "id": "e1f2",
+   "message": "Keep the usage-limit check in a single SQL statement.",
+   "applied_at": 1792127123,
+   "outcome": "applied"
+  }
+ },
+ "interrupt": {
+  "last_id": "e1f2",
+  "action": "steer",
+  "handled_at": 1792127123
+ },
+ "note": "",
+ "effective_agents": 2,
+ "log_dir": "/var/log/factory/issue-26-20261016T043000Z-s2",
+ "updated": 1792130111
+}

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# factory-opencode: opencode for a lane turn. Default: plain opencode, which authenticates the Go
+# provider as ACCOUNT 1 through the managed config (/etc/opencode/opencode.json -> {file:/etc/opencode/go.key}).
+#
+# When the turn unit was given a second-account key (systemd credential go<N>, N >= 2, from
+# run.sh via sandbox.sh SB_CRED), this process alone gets a private copy of the managed config in
+# which that one key reference points at the credential FILE, via opencode's managed-config dir
+# override. The key is never in argv, env or any file written here; /etc/opencode/ is untouched,
+# so every other opencode process on the box keeps account 1. If the reference to account 1's key is
+# not found in the managed config, refuse to run (exit 97): running would silently bill account 1.
+set -u
+cred=""
+if [[ -n ${CREDENTIALS_DIRECTORY:-} ]]; then
+  for f in "$CREDENTIALS_DIRECTORY"/go[2-9] "$CREDENTIALS_DIRECTORY"/go[1-9][0-9]; do [[ -f $f ]] && cred=$f; done
+fi
+if [[ -n $cred ]]; then
+  src=${FACTORY_MANAGED_CONFIG:-/etc/opencode/opencode.json}
+  d=$(mktemp -d "${TMPDIR:-/tmp}/factory-oc.XXXXXX") || exit 97
+  chmod 700 "$d"
+  sed "s|{file:/etc/opencode/go.key}|{file:$cred}|" "$src" > "$d/opencode.json" || exit 97
+  if ! grep -qF "{file:$cred}" "$d/opencode.json"; then
+    echo "factory-opencode: no account-1 key reference in $src; refusing to run on the wrong account" >&2
+    exit 97
+  fi
+  export OPENCODE_TEST_MANAGED_CONFIG_DIR=$d
+fi
+exec opencode "$@"

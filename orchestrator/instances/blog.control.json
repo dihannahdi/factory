@@ -1,0 +1,10 @@
+{
+  "v": 1,
+  "agents": 0,
+  "models": ["opencode/deepseek-v4.1-flash-free"],
+  "model_mode": "ordered",
+  "paused": false,
+  "queue": [],
+  "skip": [],
+  "resume_ack": null
+}

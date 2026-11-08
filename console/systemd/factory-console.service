@@ -1,0 +1,71 @@
+[Unit]
+Description=factory console (factory.example.com backend)
+After=network.target
+# /var/lib/factory-ops is created by the orchestrator install; without it the bind mounts below fail loudly.
+ConditionPathExists=/var/lib/factory-ops/ctl
+
+[Service]
+Type=simple
+User=factory-console
+SupplementaryGroups=factory-ops
+UMask=0007
+ExecStart=/usr/local/bin/node /opt/factory-console/server.mjs
+Restart=always
+RestartSec=3
+
+Environment=NODE_ENV=production
+Environment=NODE_OPTIONS=--max-old-space-size=160
+Environment=HOST=127.0.0.1
+Environment=PORT=4420
+Environment=HC_UI_DIR=/var/lib/factory-ops/ui
+Environment=HC_CTL_DIR=/var/lib/factory-ops/ctl
+Environment=HC_LOG_DIR=/var/log/factory
+Environment=HC_PUBLIC_DIR=/opt/factory-console/public
+Environment=HC_ETC_DIR=/etc/factory-console
+Environment=HC_ORIGIN=https://factory.example.com
+# Day boundary for "tokens today" (IANA zone); unset = the server's own zone.
+#Environment=HC_TZ=UTC
+# Rollout step I1 ships read-only; deploy/console-install.sh rewrites this line (READONLY=0).
+Environment=HC_READONLY=1
+
+# Hardening
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+NoNewPrivileges=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictRealtime=yes
+RestrictNamespaces=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+CapabilityBoundingSet=
+AmbientCapabilities=
+ProtectProc=invisible
+ProcSubset=pid
+
+# Everything else on the box (other tenants, their sites and data) is simply not there.
+TemporaryFileSystem=/opt:ro /www:ro /srv:ro /mnt:ro /media:ro /var/lib:ro /var/log:ro /var/www:ro
+BindReadOnlyPaths=/opt/factory-console /var/lib/factory-ops/ui /var/log/factory /etc/factory-console
+BindPaths=/var/lib/factory-ops/ctl
+# ProtectSystem=strict would remount the bind above read-only without this.
+ReadWritePaths=/var/lib/factory-ops/ctl
+InaccessiblePaths=-/etc/factory
+
+# Loopback only.
+IPAddressDeny=any
+IPAddressAllow=localhost
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+MemoryMax=256M
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target

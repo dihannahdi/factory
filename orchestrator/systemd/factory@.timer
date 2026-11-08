@@ -1,0 +1,10 @@
+[Unit]
+Description=Start factory lane %i 2 minutes after its last run ended
+
+[Timer]
+OnBootSec=10min
+OnUnitInactiveSec=2min
+AccuracySec=1s
+
+[Install]
+WantedBy=timers.target

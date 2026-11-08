@@ -1,0 +1,16 @@
+{
+  "name": "factory",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An autonomous coding-agent orchestrator that works a repo's issues end to end. Orchestrator should be fun.",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "factory": "bin/factory.mjs" },
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "demo": "node bin/factory.mjs demo",
+    "doctor": "node bin/factory.mjs doctor",
+    "status": "node bin/factory.mjs status",
+    "test": "node --test bin/test/*.test.mjs && cd console && npm test"
+  }
+}

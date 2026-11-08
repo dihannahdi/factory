@@ -1,0 +1,13 @@
+[Unit]
+Description=factory: all lanes together
+Before=slices.target
+
+# Lane slices (factory-s1.slice ...) nest under this one by name. The box is production and
+# shared: agents get what is left over, never the whole machine.
+[Slice]
+CPUWeight=20
+CPUQuota=800%
+# 2026-10-18: three building lanes sat at 19G against MemoryHigh=20G while single builds still
+# peaked at a sandbox's 8G. The box has 47G; production uses about 7-11G of it.
+MemoryHigh=26G
+MemoryMax=30G

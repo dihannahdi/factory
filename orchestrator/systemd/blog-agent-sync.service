@@ -1,0 +1,11 @@
+[Unit]
+Description=blog-agent sync: GitHub and model state for the console, whitelist, unblock, claims
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/blog-agent/instance.env
+ExecStart=/opt/factory/sync.sh
+# Must finish inside one timer period; sync.sh gives every step its own timeout.
+TimeoutStartSec=55

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Test stub: the orchestrator tests must never touch a real repository.
+case "$*" in
+  *rev-parse*) echo 1111111111111111111111111111111111111111 ;;
+esac
+exit 0

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Fake journalctl for the memory-cap tests: prints $FAKE_JOURNAL_FILE, or fails like a missing unit.
+[[ -n ${FAKE_JOURNAL_FILE:-} && -f $FAKE_JOURNAL_FILE ]] || exit 1
+cat "$FAKE_JOURNAL_FILE"

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Test stub: -o <file> gets the fixture for the URL; the health check goes to /dev/null.
+out="" url=""
+while (( $# )); do
+  case $1 in
+    -o) out=$2; shift ;;
+    http*) url=$1 ;;
+  esac
+  shift
+done
+case $url in
+  *zen/v1/models) body=$(cat "${FAKE_CURL_DIR:-/nonexistent}/zen.json") ;;
+  *models.dev*) body=$(cat "${FAKE_CURL_DIR:-/nonexistent}/modelsdev.json") ;;
+  *) body=ok ;;
+esac
+if [[ -n $out && $out != /dev/null ]]; then printf '%s\n' "$body" > "$out"; fi
+exit 0

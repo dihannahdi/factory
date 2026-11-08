@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Test stub: `stat -c '%U %G %a %s' <file>` answers from <file>.stat when that exists (Git Bash on
+# Windows cannot express owner root, group factory or mode 0640); anything else is the real stat.
+if [[ ${1:-} == -c && ${2:-} == '%U %G %a %s' && -f "${3:-}.stat" ]]; then cat "$3.stat"; exit 0; fi
+exec /usr/bin/stat "$@"

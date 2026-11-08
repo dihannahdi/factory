@@ -1,0 +1,2371 @@
+{
+ "v": 1,
+ "now": 1792136664,
+ "readonly": false,
+ "control": {
+  "v": 1,
+  "agents": 1,
+  "models": [
+   "opencode/deepseek-v4.1-flash-free"
+  ],
+  "model_mode": "ordered",
+  "paused": false,
+  "queue": [],
+  "skip": [],
+  "resume_ack": null,
+  "updated_at": "2026-10-16T07:43:19Z"
+ },
+ "slots": [
+  {
+   "v": 1,
+   "slot": 1,
+   "run_id": null,
+   "state": "idle",
+   "stage": null,
+   "sub": "",
+   "issue": null,
+   "pr": null,
+   "model": null,
+   "session": null,
+   "turn": null,
+   "stage_started": null,
+   "issue_started": null,
+   "tokens": {
+    "input": 0,
+    "output": 0,
+    "reasoning": 0,
+    "cache_read": 0
+   },
+   "requirements": null,
+   "ci": null,
+   "steer": {
+    "pending": null,
+    "last": null
+   },
+   "interrupt": null,
+   "note": "",
+   "effective_agents": 1,
+   "log_dir": null,
+   "updated": 1792136606,
+   "stale": false
+  },
+  {
+   "v": 1,
+   "slot": 2,
+   "run_id": null,
+   "state": "parked",
+   "stage": null,
+   "sub": "",
+   "issue": null,
+   "pr": null,
+   "model": null,
+   "session": null,
+   "turn": null,
+   "stage_started": null,
+   "issue_started": null,
+   "tokens": {
+    "input": 0,
+    "output": 0,
+    "reasoning": 0,
+    "cache_read": 0
+   },
+   "requirements": null,
+   "ci": null,
+   "steer": {
+    "pending": null,
+    "last": null
+   },
+   "interrupt": null,
+   "note": "",
+   "effective_agents": 0,
+   "log_dir": null,
+   "updated": null,
+   "stale": false
+  },
+  {
+   "v": 1,
+   "slot": 3,
+   "run_id": null,
+   "state": "parked",
+   "stage": null,
+   "sub": "",
+   "issue": null,
+   "pr": null,
+   "model": null,
+   "session": null,
+   "turn": null,
+   "stage_started": null,
+   "issue_started": null,
+   "tokens": {
+    "input": 0,
+    "output": 0,
+    "reasoning": 0,
+    "cache_read": 0
+   },
+   "requirements": null,
+   "ci": null,
+   "steer": {
+    "pending": null,
+    "last": null
+   },
+   "interrupt": null,
+   "note": "",
+   "effective_agents": 0,
+   "log_dir": null,
+   "updated": null,
+   "stale": false
+  }
+ ],
+ "activity": {
+  "1": [
+   {
+    "t": 1792136271157,
+    "kind": "text",
+    "tool": null,
+    "target": null,
+    "text": "I have enough to decide. The issue depends on #3 and #8, both closed; the coupon model already exists in crates/shop-core, so this is an extension, not a new module. Plan below.",
+    "status": null,
+    "tokens": null
+   },
+   {
+    "t": 1792136271184,
+    "kind": "tool",
+    "tool": "read",
+    "target": "/home/factory/s1/work",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136272246,
+    "kind": "tool",
+    "tool": "bash",
+    "target": "git log --oneline -15 && git status --short",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136272246,
+    "kind": "step",
+    "tool": null,
+    "target": null,
+    "text": null,
+    "status": null,
+    "tokens": {
+     "in": 11300,
+     "out": 119
+    }
+   },
+   {
+    "t": 1792136276273,
+    "kind": "tool",
+    "tool": "read",
+    "target": "ls src/ crates/ docs/",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136276273,
+    "kind": "tool",
+    "tool": "read",
+    "target": "grep -rn \"checkout\" --include=*.rs crates | head -40",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136276358,
+    "kind": "tool",
+    "tool": "bash",
+    "target": "cat docs/CHANGELOG.md | head -45",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136276358,
+    "kind": "step",
+    "tool": null,
+    "target": null,
+    "text": null,
+    "status": null,
+    "tokens": {
+     "in": 741,
+     "out": 181
+    }
+   },
+   {
+    "t": 1792136406414,
+    "kind": "tool",
+    "tool": "task",
+    "target": "Explore shop-core engine",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136436285,
+    "kind": "tool",
+    "tool": "task",
+    "target": "Explore frontend + docs",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136491116,
+    "kind": "tool",
+    "tool": "task",
+    "target": "Explore shop-api structure",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136491117,
+    "kind": "step",
+    "tool": null,
+    "target": null,
+    "text": null,
+    "status": null,
+    "tokens": {
+     "in": 844,
+     "out": 1151
+    }
+   },
+   {
+    "t": 1792136505109,
+    "kind": "tool",
+    "tool": "bash",
+    "target": "gh issue view 23 --repo acme/shop | head -40",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136505197,
+    "kind": "tool",
+    "tool": "bash",
+    "target": "grep -rn \"#23\\b\" --include=*.rs --include=*.md .",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136505224,
+    "kind": "step",
+    "tool": null,
+    "target": null,
+    "text": null,
+    "status": null,
+    "tokens": {
+     "in": 24565,
+     "out": 174
+    }
+   },
+   {
+    "t": 1792136509418,
+    "kind": "tool",
+    "tool": "bash",
+    "target": "sed -n '1,80p' docs/adr/0003-money-is-integer-cents.md",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136509547,
+    "kind": "tool",
+    "tool": "bash",
+    "target": "grep -rniE \"coupon|discount\" crates | head",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136509547,
+    "kind": "step",
+    "tool": null,
+    "target": null,
+    "text": null,
+    "status": null,
+    "tokens": {
+     "in": 2472,
+     "out": 173
+    }
+   },
+   {
+    "t": 1792136548204,
+    "kind": "tool",
+    "tool": "bash",
+    "target": "git log --oneline -15 && git status --short",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136548269,
+    "kind": "tool",
+    "tool": "bash",
+    "target": "ls src/ crates/ docs/",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136548295,
+    "kind": "step",
+    "tool": null,
+    "target": null,
+    "text": null,
+    "status": null,
+    "tokens": {
+     "in": 2378,
+     "out": 226
+    }
+   },
+   {
+    "t": 1792136571603,
+    "kind": "tool",
+    "tool": "bash",
+    "target": "grep -rn \"checkout\" --include=*.rs crates | head -40",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136571603,
+    "kind": "tool",
+    "tool": "bash",
+    "target": "cat docs/CHANGELOG.md | head -45",
+    "text": null,
+    "status": "completed",
+    "tokens": null
+   },
+   {
+    "t": 1792136571603,
+    "kind": "step",
+    "tool": null,
+    "target": null,
+    "text": null,
+    "status": null,
+    "tokens": {
+     "in": 2608,
+     "out": 255
+    }
+   },
+   {
+    "t": 1792136600004,
+    "kind": "text",
+    "tool": null,
+    "target": null,
+    "text": "I have enough to decide. The issue depends on #3 and #8, both closed; the coupon model already exists in crates/shop-core, so this is an extension, not a new module. Plan below.",
+    "status": null,
+    "tokens": null
+   },
+   {
+    "t": 1792136600006,
+    "kind": "step",
+    "tool": null,
+    "target": null,
+    "text": null,
+    "status": null,
+    "tokens": {
+     "in": 2695,
+     "out": 1188
+    }
+   }
+  ],
+  "2": [],
+  "3": []
+ },
+ "github": {
+  "v": 1,
+  "updated": 1792136611,
+  "ok": true,
+  "error": null,
+  "issues": [
+   {
+    "n": 12,
+    "title": "[ENG-09] Product variants (size, colour) (epic)",
+    "tag": "ENG-09",
+    "family": "ENG",
+    "milestone": "M1 Core flows",
+    "priority": "P0",
+    "labels": [
+     "area/checkout",
+     "kind/feature",
+     "P0"
+    ],
+    "class": "taken",
+    "reason": "open PR #133, #117",
+    "deps": [],
+    "taken_by": [
+     133,
+     117
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/12"
+   },
+   {
+    "n": 13,
+    "title": "[ENG-10] Guest checkout without an account",
+    "tag": "ENG-10",
+    "family": "ENG",
+    "milestone": "M1 Core flows",
+    "priority": "P1",
+    "labels": [
+     "area/catalog",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "taken",
+    "reason": "open PR #117",
+    "deps": [],
+    "taken_by": [
+     117
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/13"
+   },
+   {
+    "n": 14,
+    "title": "[ENG-11] Email receipts with line items",
+    "tag": "ENG-11",
+    "family": "ENG",
+    "milestone": "M1 Core flows",
+    "priority": "P1",
+    "labels": [
+     "area/catalog",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "taken",
+    "reason": "open PR #131, #117",
+    "deps": [],
+    "taken_by": [
+     131,
+     117
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/14"
+   },
+   {
+    "n": 15,
+    "title": "[ENG-12] Rate-limit the public API",
+    "tag": "ENG-12",
+    "family": "ENG",
+    "milestone": "M1 Core flows",
+    "priority": "P0",
+    "labels": [
+     "area/catalog",
+     "kind/feature",
+     "P0"
+    ],
+    "class": "taken",
+    "reason": "open PR #131, #117",
+    "deps": [],
+    "taken_by": [
+     131,
+     117
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/15"
+   },
+   {
+    "n": 16,
+    "title": "[ENG-13] Wishlist shared by link",
+    "tag": "ENG-13",
+    "family": "ENG",
+    "milestone": "M1 Core flows",
+    "priority": "P1",
+    "labels": [
+     "area/losses",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "taken",
+    "reason": "open PR #120",
+    "deps": [],
+    "taken_by": [
+     120
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/16"
+   },
+   {
+    "n": 17,
+    "title": "[ENG-14] Low-stock alerts for admins",
+    "tag": "ENG-14",
+    "family": "ENG",
+    "milestone": "M1 Core flows",
+    "priority": "P1",
+    "labels": [
+     "area/weather",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "taken",
+    "reason": "open PR #119, #117",
+    "deps": [],
+    "taken_by": [
+     119,
+     117
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/17"
+   },
+   {
+    "n": 18,
+    "title": "[ENG-15] Currency display per locale",
+    "tag": "ENG-15",
+    "family": "ENG",
+    "milestone": "M1 Core flows",
+    "priority": "P0",
+    "labels": [
+     "area/payments",
+     "kind/beyond",
+     "P0"
+    ],
+    "class": "taken",
+    "reason": "open PR #120, #119",
+    "deps": [],
+    "taken_by": [
+     120,
+     119
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/18"
+   },
+   {
+    "n": 21,
+    "title": "[OUT-12] Image upload with thumbnails",
+    "tag": "OUT-12",
+    "family": "OUT",
+    "milestone": "M1 Core flows",
+    "priority": "P0",
+    "labels": [
+     "area/payments",
+     "kind/beyond",
+     "P0",
+     "agent-blocked"
+    ],
+    "class": "blocked",
+    "reason": "waits for #17, #18",
+    "deps": [
+     17,
+     18
+    ],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/21"
+   },
+   {
+    "n": 22,
+    "title": "[LAY-01] Saved addresses on profile",
+    "tag": "LAY-01",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/layout",
+     "area/platform",
+     "kind/feature",
+     "P0"
+    ],
+    "class": "taken",
+    "reason": "open PR #135",
+    "deps": [],
+    "taken_by": [
+     135
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/22"
+   },
+   {
+    "n": 23,
+    "title": "[LAY-02] Abandoned-cart reminder emails",
+    "tag": "LAY-02",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/shading",
+     "kind/feature",
+     "P0",
+     "agent-blocked"
+    ],
+    "class": "blocked",
+    "reason": "waits for #22, #58",
+    "deps": [
+     22,
+     58
+    ],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/23"
+   },
+   {
+    "n": 24,
+    "title": "[ELE-01] Gift cards: issue and redeem",
+    "tag": "ELE-01",
+    "family": "ELE",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/search",
+     "kind/feature",
+     "P0",
+     "agent-blocked"
+    ],
+    "class": "blocked",
+    "reason": "waits for #22",
+    "deps": [
+     22
+    ],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/24"
+   },
+   {
+    "n": 26,
+    "title": "[OUT-01] Category tree with drag to reorder (epic)",
+    "tag": "OUT-01",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/report",
+     "area/payments",
+     "kind/feature",
+     "P0",
+     "agent-blocked"
+    ],
+    "class": "blocked",
+    "reason": "waits for #23",
+    "deps": [
+     23
+    ],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/26"
+   },
+   {
+    "n": 27,
+    "title": "[OUT-02] Payment provider failover (epic)",
+    "tag": "OUT-02",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/finance",
+     "area/tax",
+     "kind/beyond",
+     "P0"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 1,
+    "url": "https://github.com/acme/shop/issues/27"
+   },
+   {
+    "n": 28,
+    "title": "[ENG-17] Two-factor login for staff",
+    "tag": "ENG-17",
+    "family": "ENG",
+    "milestone": "M2 Feature parity",
+    "priority": "P2",
+    "labels": [
+     "area/checkout",
+     "area/catalog",
+     "kind/feature",
+     "P2"
+    ],
+    "class": "taken",
+    "reason": "open PR #120",
+    "deps": [],
+    "taken_by": [
+     120
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/28"
+   },
+   {
+    "n": 29,
+    "title": "[LAY-03] Reviews with photo attachments",
+    "tag": "LAY-03",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/layout",
+     "area/platform",
+     "kind/feature",
+     "P0"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 2,
+    "url": "https://github.com/acme/shop/issues/29"
+   },
+   {
+    "n": 30,
+    "title": "[LAY-04] Bundle products priced as one",
+    "tag": "LAY-04",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/layout",
+     "area/platform",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 11,
+    "url": "https://github.com/acme/shop/issues/30"
+   },
+   {
+    "n": 31,
+    "title": "[LAY-06] Pre-orders with release dates",
+    "tag": "LAY-06",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/layout",
+     "area/3d-ui",
+     "kind/feature",
+     "P0"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 3,
+    "url": "https://github.com/acme/shop/issues/31"
+   },
+   {
+    "n": 32,
+    "title": "[LAY-07] Store pickup as a shipping option",
+    "tag": "LAY-07",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/layout",
+     "kind/feature",
+     "P0"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 4,
+    "url": "https://github.com/acme/shop/issues/32"
+   },
+   {
+    "n": 33,
+    "title": "[LAY-08] Order status timeline",
+    "tag": "LAY-08",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/layout",
+     "kind/feature",
+     "P0"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 5,
+    "url": "https://github.com/acme/shop/issues/33"
+   },
+   {
+    "n": 34,
+    "title": "[LAY-09] Customer segments for promotions",
+    "tag": "LAY-09",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/layout",
+     "area/3d-ui",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 12,
+    "url": "https://github.com/acme/shop/issues/34"
+   },
+   {
+    "n": 35,
+    "title": "[LAY-10] Fraud score on high-value orders",
+    "tag": "LAY-10",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/layout",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 13,
+    "url": "https://github.com/acme/shop/issues/35"
+   },
+   {
+    "n": 36,
+    "title": "[LAY-13] Subscription orders every N weeks",
+    "tag": "LAY-13",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/shading",
+     "area/layout",
+     "kind/feature",
+     "P0"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 6,
+    "url": "https://github.com/acme/shop/issues/36"
+   },
+   {
+    "n": 37,
+    "title": "[LAY-14] Accessible product gallery",
+    "tag": "LAY-14",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P2",
+    "labels": [
+     "area/layout",
+     "kind/feature",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 25,
+    "url": "https://github.com/acme/shop/issues/37"
+   },
+   {
+    "n": 38,
+    "title": "[LAY-18] Faster product listing query",
+    "tag": "LAY-18",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/3d-ui",
+     "area/platform",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "taken",
+    "reason": "open PR #134",
+    "deps": [],
+    "taken_by": [
+     134
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/38"
+   },
+   {
+    "n": 39,
+    "title": "[LAY-19] Split shipments per warehouse",
+    "tag": "LAY-19",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/3d-ui",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 14,
+    "url": "https://github.com/acme/shop/issues/39"
+   },
+   {
+    "n": 40,
+    "title": "[ELE-04] Invoice numbering per year (epic)",
+    "tag": "ELE-04",
+    "family": "ELE",
+    "milestone": "M2 Feature parity",
+    "priority": "P2",
+    "labels": [
+     "area/search",
+     "kind/feature",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 26,
+    "url": "https://github.com/acme/shop/issues/40"
+   },
+   {
+    "n": 41,
+    "title": "[ELE-06] Dark mode for the storefront",
+    "tag": "ELE-06",
+    "family": "ELE",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/search",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 15,
+    "url": "https://github.com/acme/shop/issues/41"
+   },
+   {
+    "n": 42,
+    "title": "[ELE-10] Recently viewed products",
+    "tag": "ELE-10",
+    "family": "ELE",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/admin",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 16,
+    "url": "https://github.com/acme/shop/issues/42"
+   },
+   {
+    "n": 43,
+    "title": "[ELE-11] Back-in-stock notifications (epic)",
+    "tag": "ELE-11",
+    "family": "ELE",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/admin",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 17,
+    "url": "https://github.com/acme/shop/issues/43"
+   },
+   {
+    "n": 44,
+    "title": "[ELE-13] Loyalty points ledger (epic)",
+    "tag": "ELE-13",
+    "family": "ELE",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/ui",
+     "kind/feature",
+     "P0"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 7,
+    "url": "https://github.com/acme/shop/issues/44"
+   },
+   {
+    "n": 45,
+    "title": "[OUT-03] Delivery date estimate on product page (epic)",
+    "tag": "OUT-03",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/report",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 18,
+    "url": "https://github.com/acme/shop/issues/45"
+   },
+   {
+    "n": 46,
+    "title": "[OUT-04] Bulk import of customers",
+    "tag": "OUT-04",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/report",
+     "area/finance",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 19,
+    "url": "https://github.com/acme/shop/issues/46"
+   },
+   {
+    "n": 47,
+    "title": "[OUT-05] Translate product copy (epic)",
+    "tag": "OUT-05",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/finance",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 20,
+    "url": "https://github.com/acme/shop/issues/47"
+   },
+   {
+    "n": 48,
+    "title": "[OUT-08] Mobile checkout in three taps",
+    "tag": "OUT-08",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/storage",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 21,
+    "url": "https://github.com/acme/shop/issues/48"
+   },
+   {
+    "n": 49,
+    "title": "[OUT-09] Cache product pages at the edge",
+    "tag": "OUT-09",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/storage",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 22,
+    "url": "https://github.com/acme/shop/issues/49"
+   },
+   {
+    "n": 50,
+    "title": "[OUT-10] Health endpoint reports DB and queue",
+    "tag": "OUT-10",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P2",
+    "labels": [
+     "area/storage",
+     "kind/feature",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 27,
+    "url": "https://github.com/acme/shop/issues/50"
+   },
+   {
+    "n": 51,
+    "title": "[OUT-13] Feature flags per store",
+    "tag": "OUT-13",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P2",
+    "labels": [
+     "area/payments",
+     "kind/feature",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 28,
+    "url": "https://github.com/acme/shop/issues/51"
+   },
+   {
+    "n": 52,
+    "title": "[OUT-20] Dead-letter queue for failed jobs (epic)",
+    "tag": "OUT-20",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/platform",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 23,
+    "url": "https://github.com/acme/shop/issues/52"
+   },
+   {
+    "n": 53,
+    "title": "[ENG-16] End-to-end test for checkout",
+    "tag": "ENG-16",
+    "family": "ENG",
+    "milestone": "M3 Beyond parity",
+    "priority": "P2",
+    "labels": [
+     "area/catalog",
+     "kind/beyond",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 53,
+    "url": "https://github.com/acme/shop/issues/53"
+   },
+   {
+    "n": 54,
+    "title": "[ENG-18] Migrate orders table to bigint ids",
+    "tag": "ENG-18",
+    "family": "ENG",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/losses",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "taken",
+    "reason": "open PR #120",
+    "deps": [],
+    "taken_by": [
+     120
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/54"
+   },
+   {
+    "n": 55,
+    "title": "[LAY-05] Lint and typecheck in CI (epic)",
+    "tag": "LAY-05",
+    "family": "LAY",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/shading",
+     "area/layout",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 29,
+    "url": "https://github.com/acme/shop/issues/55"
+   },
+   {
+    "n": 56,
+    "title": "[LAY-11] Seed data for local development",
+    "tag": "LAY-11",
+    "family": "LAY",
+    "milestone": "M3 Beyond parity",
+    "priority": "P2",
+    "labels": [
+     "area/layout",
+     "kind/beyond",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 54,
+    "url": "https://github.com/acme/shop/issues/56"
+   },
+   {
+    "n": 57,
+    "title": "[LAY-12] Structured logs with request ids",
+    "tag": "LAY-12",
+    "family": "LAY",
+    "milestone": "M3 Beyond parity",
+    "priority": "P2",
+    "labels": [
+     "area/shading",
+     "area/layout",
+     "kind/beyond",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 55,
+    "url": "https://github.com/acme/shop/issues/57"
+   },
+   {
+    "n": 58,
+    "title": "[LAY-15] Per-store theme settings",
+    "tag": "LAY-15",
+    "family": "LAY",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/shading",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 30,
+    "url": "https://github.com/acme/shop/issues/58"
+   },
+   {
+    "n": 59,
+    "title": "[LAY-16] Data retention for old carts",
+    "tag": "LAY-16",
+    "family": "LAY",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/shading",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 31,
+    "url": "https://github.com/acme/shop/issues/59"
+   },
+   {
+    "n": 60,
+    "title": "[LAY-17] Cart keeps items across sessions",
+    "tag": "LAY-17",
+    "family": "LAY",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/3d-ui",
+     "area/platform",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 32,
+    "url": "https://github.com/acme/shop/issues/60"
+   },
+   {
+    "n": 61,
+    "title": "[ELE-03] Price rules: percentage and fixed discounts",
+    "tag": "ELE-03",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/weather",
+     "area/search",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 33,
+    "url": "https://github.com/acme/shop/issues/61"
+   },
+   {
+    "n": 62,
+    "title": "[ELE-05] Stock reservation during checkout",
+    "tag": "ELE-05",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P2",
+    "labels": [
+     "area/search",
+     "area/storage",
+     "kind/beyond",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 56,
+    "url": "https://github.com/acme/shop/issues/62"
+   },
+   {
+    "n": 63,
+    "title": "[ELE-07] Refund flow for partial orders (epic)",
+    "tag": "ELE-07",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/search",
+     "area/tax",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 34,
+    "url": "https://github.com/acme/shop/issues/63"
+   },
+   {
+    "n": 64,
+    "title": "[ELE-08] Search ranks exact SKU matches first",
+    "tag": "ELE-08",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/search",
+     "area/tax",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 35,
+    "url": "https://github.com/acme/shop/issues/64"
+   },
+   {
+    "n": 65,
+    "title": "[ELE-09] Order history page with filters",
+    "tag": "ELE-09",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/search",
+     "area/tax",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 36,
+    "url": "https://github.com/acme/shop/issues/65"
+   },
+   {
+    "n": 66,
+    "title": "[ELE-12] Shipping rates from carrier API",
+    "tag": "ELE-12",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/admin",
+     "area/tax",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 37,
+    "url": "https://github.com/acme/shop/issues/66"
+   },
+   {
+    "n": 67,
+    "title": "[ELE-14] Tax calculation per region",
+    "tag": "ELE-14",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/ui",
+     "area/tax",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 38,
+    "url": "https://github.com/acme/shop/issues/67"
+   },
+   {
+    "n": 68,
+    "title": "[ELE-15] Admin: bulk edit product prices",
+    "tag": "ELE-15",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P2",
+    "labels": [
+     "area/ui",
+     "area/platform",
+     "kind/feature",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 57,
+    "url": "https://github.com/acme/shop/issues/68"
+   },
+   {
+    "n": 69,
+    "title": "[OUT-07] Webhook retries with backoff (epic)",
+    "tag": "OUT-07",
+    "family": "OUT",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/finance",
+     "area/tax",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 39,
+    "url": "https://github.com/acme/shop/issues/69"
+   },
+   {
+    "n": 70,
+    "title": "[OUT-14] Coupon codes with usage limits",
+    "tag": "OUT-14",
+    "family": "OUT",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/testing",
+     "area/payments",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 40,
+    "url": "https://github.com/acme/shop/issues/70"
+   },
+   {
+    "n": 74,
+    "title": "[OUT-21] Email receipts with line items",
+    "tag": "OUT-21",
+    "family": "OUT",
+    "milestone": "M3 Beyond parity",
+    "priority": "P2",
+    "labels": [
+     "area/platform",
+     "kind/beyond",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 58,
+    "url": "https://github.com/acme/shop/issues/74"
+   },
+   {
+    "n": 75,
+    "title": "[OUT-22] Rate-limit the public API",
+    "tag": "OUT-22",
+    "family": "OUT",
+    "milestone": "M3 Beyond parity",
+    "priority": "P2",
+    "labels": [
+     "area/platform",
+     "kind/beyond",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 59,
+    "url": "https://github.com/acme/shop/issues/75"
+   },
+   {
+    "n": 76,
+    "title": "Wishlist shared by link",
+    "tag": null,
+    "family": null,
+    "milestone": null,
+    "priority": null,
+    "labels": [],
+    "class": "ineligible",
+    "reason": "no milestone",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/76"
+   },
+   {
+    "n": 89,
+    "title": "[ELE-16] Reviews with photo attachments",
+    "tag": "ELE-16",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/search",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 41,
+    "url": "https://github.com/acme/shop/issues/89"
+   },
+   {
+    "n": 90,
+    "title": "[ELE-17] Bundle products priced as one",
+    "tag": "ELE-17",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/search",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 42,
+    "url": "https://github.com/acme/shop/issues/90"
+   },
+   {
+    "n": 91,
+    "title": "[ELE-18] Pre-orders with release dates",
+    "tag": "ELE-18",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/search",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 43,
+    "url": "https://github.com/acme/shop/issues/91"
+   },
+   {
+    "n": 92,
+    "title": "[ELE-19] Store pickup as a shipping option",
+    "tag": "ELE-19",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/layout",
+     "area/search",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 44,
+    "url": "https://github.com/acme/shop/issues/92"
+   },
+   {
+    "n": 93,
+    "title": "[ELE-20] Order status timeline",
+    "tag": "ELE-20",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P2",
+    "labels": [
+     "area/search",
+     "area/admin",
+     "kind/beyond",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 60,
+    "url": "https://github.com/acme/shop/issues/93"
+   },
+   {
+    "n": 94,
+    "title": "[ELE-21] Customer segments for promotions",
+    "tag": "ELE-21",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/search",
+     "area/admin",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 45,
+    "url": "https://github.com/acme/shop/issues/94"
+   },
+   {
+    "n": 95,
+    "title": "[ELE-22] Fraud score on high-value orders",
+    "tag": "ELE-22",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P2",
+    "labels": [
+     "area/search",
+     "area/admin",
+     "kind/beyond",
+     "P2"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 61,
+    "url": "https://github.com/acme/shop/issues/95"
+   },
+   {
+    "n": 96,
+    "title": "[LAY-22] Subscription orders every N weeks",
+    "tag": "LAY-22",
+    "family": "LAY",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/layout",
+     "kind/beyond",
+     "P1",
+     "area/inventory"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 46,
+    "url": "https://github.com/acme/shop/issues/96"
+   },
+   {
+    "n": 97,
+    "title": "[LAY-23] Accessible product gallery",
+    "tag": "LAY-23",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P1",
+    "labels": [
+     "area/layout",
+     "area/search",
+     "kind/feature",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 24,
+    "url": "https://github.com/acme/shop/issues/97"
+   },
+   {
+    "n": 98,
+    "title": "[OUT-24] Faster product listing query",
+    "tag": "OUT-24",
+    "family": "OUT",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/report",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 47,
+    "url": "https://github.com/acme/shop/issues/98"
+   },
+   {
+    "n": 99,
+    "title": "[OUT-25] Split shipments per warehouse",
+    "tag": "OUT-25",
+    "family": "OUT",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/testing",
+     "kind/beyond",
+     "P1",
+     "area/shipping"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 48,
+    "url": "https://github.com/acme/shop/issues/99"
+   },
+   {
+    "n": 100,
+    "title": "[OUT-26] Invoice numbering per year",
+    "tag": "OUT-26",
+    "family": "OUT",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/admin",
+     "area/platform",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 49,
+    "url": "https://github.com/acme/shop/issues/100"
+   },
+   {
+    "n": 101,
+    "title": "[OUT-27] Dark mode for the storefront",
+    "tag": "OUT-27",
+    "family": "OUT",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/report",
+     "area/payments",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 50,
+    "url": "https://github.com/acme/shop/issues/101"
+   },
+   {
+    "n": 102,
+    "title": "[OUT-28] Recently viewed products",
+    "tag": "OUT-28",
+    "family": "OUT",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/admin",
+     "area/platform",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 51,
+    "url": "https://github.com/acme/shop/issues/102"
+   },
+   {
+    "n": 108,
+    "title": "[OUT-29] Mobile checkout in three taps",
+    "tag": "OUT-29",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P2",
+    "labels": [
+     "area/platform",
+     "kind/feature",
+     "P2"
+    ],
+    "class": "taken",
+    "reason": "open PR #129",
+    "deps": [],
+    "taken_by": [
+     129
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/108"
+   },
+   {
+    "n": 121,
+    "title": "[ENG-19] Price rules: percentage and fixed discounts",
+    "tag": "ENG-19",
+    "family": "ENG",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/shading",
+     "area/platform",
+     "P0"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 8,
+    "url": "https://github.com/acme/shop/issues/121"
+   },
+   {
+    "n": 122,
+    "title": "[OUT-31] Stock reservation during checkout",
+    "tag": "OUT-31",
+    "family": "OUT",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/platform",
+     "P0"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 9,
+    "url": "https://github.com/acme/shop/issues/122"
+   },
+   {
+    "n": 123,
+    "title": "[LAY-24] Refund flow for partial orders",
+    "tag": "LAY-24",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/layout",
+     "area/3d-ui",
+     "P0"
+    ],
+    "class": "taken",
+    "reason": "open PR #135",
+    "deps": [],
+    "taken_by": [
+     135
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/123"
+   },
+   {
+    "n": 124,
+    "title": "[ENG-20] Search ranks exact SKU matches first",
+    "tag": "ENG-20",
+    "family": "ENG",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/checkout",
+     "area/platform",
+     "P0"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 10,
+    "url": "https://github.com/acme/shop/issues/124"
+   },
+   {
+    "n": 125,
+    "title": "[LAY-25] Order history page with filters",
+    "tag": "LAY-25",
+    "family": "LAY",
+    "milestone": "M2 Feature parity",
+    "priority": "P0",
+    "labels": [
+     "area/3d-ui",
+     "area/platform",
+     "P0"
+    ],
+    "class": "taken",
+    "reason": "open PR #134",
+    "deps": [],
+    "taken_by": [
+     134
+    ],
+    "claimed_by": null,
+    "order": null,
+    "url": "https://github.com/acme/shop/issues/125"
+   },
+   {
+    "n": 132,
+    "title": "[ELE-24] Product variants (size, colour)",
+    "tag": "ELE-24",
+    "family": "ELE",
+    "milestone": "M3 Beyond parity",
+    "priority": "P1",
+    "labels": [
+     "area/layout",
+     "area/admin",
+     "kind/beyond",
+     "P1"
+    ],
+    "class": "eligible",
+    "reason": "",
+    "deps": [],
+    "taken_by": [],
+    "claimed_by": null,
+    "order": 52,
+    "url": "https://github.com/acme/shop/issues/132"
+   }
+  ],
+  "prs": [
+   {
+    "n": 135,
+    "issue": 123,
+    "title": "[LAY-24] Rate-limit the public API",
+    "head": "53f809ef03a99e2b572ac18e7f6293988a74c2c3",
+    "agent": false,
+    "ci": "pass",
+    "mergeable": "MERGEABLE",
+    "created": 1791797400,
+    "url": "https://github.com/acme/shop/pull/135"
+   },
+   {
+    "n": 134,
+    "issue": 125,
+    "title": "[LAY-25] Email receipts with line items",
+    "head": "be309d740e7c1329b2864f5b8c941524bd608065",
+    "agent": false,
+    "ci": "pass",
+    "mergeable": "MERGEABLE",
+    "created": 1791794688,
+    "url": "https://github.com/acme/shop/pull/134"
+   },
+   {
+    "n": 133,
+    "issue": 12,
+    "title": "[ENG-09] Guest checkout without an account",
+    "head": "2bba131348ca2e63084f4432ecbf2a63c552a0d7",
+    "agent": false,
+    "ci": "fail",
+    "mergeable": "MERGEABLE",
+    "created": 1791515968,
+    "url": "https://github.com/acme/shop/pull/133"
+   },
+   {
+    "n": 131,
+    "issue": 15,
+    "title": "[ENG-12] Inventory sync from warehouse CSV",
+    "head": "b74fb6f73224498e268f1e1d60caad594a5a9eaa",
+    "agent": false,
+    "ci": "pass",
+    "mergeable": "CONFLICTING",
+    "created": 1791461410,
+    "url": "https://github.com/acme/shop/pull/131"
+   },
+   {
+    "n": 129,
+    "issue": 108,
+    "title": "[OUT-29] Webhook retries with backoff",
+    "head": "9110d246a11b513e1f9928ba240506b5c758092a",
+    "agent": false,
+    "ci": "pass",
+    "mergeable": "MERGEABLE",
+    "created": 1791340786,
+    "url": "https://github.com/acme/shop/pull/129"
+   },
+   {
+    "n": 120,
+    "issue": 16,
+    "title": "[ENG-13] Cart keeps items across sessions",
+    "head": "a5121ebf47fd712dae824d890264f90902df6a96",
+    "agent": false,
+    "ci": "fail",
+    "mergeable": "CONFLICTING",
+    "created": 1791200176,
+    "url": "https://github.com/acme/shop/pull/120"
+   },
+   {
+    "n": 119,
+    "issue": 17,
+    "title": "[ENG-14] Data retention for old carts",
+    "head": "c5e86158f1ba41bba9269a6cfead612cb3986def",
+    "agent": false,
+    "ci": "fail",
+    "mergeable": "MERGEABLE",
+    "created": 1791200100,
+    "url": "https://github.com/acme/shop/pull/119"
+   },
+   {
+    "n": 117,
+    "issue": 13,
+    "title": "[ENG-10] Structured logs with request ids",
+    "head": "50d9eaf329fb24d30593bdbb906348265595f52a",
+    "agent": false,
+    "ci": "pass",
+    "mergeable": "CONFLICTING",
+    "created": 1791195062,
+    "url": "https://github.com/acme/shop/pull/117"
+   }
+  ],
+  "runner": {
+   "queued": 0,
+   "in_progress": 0
+  },
+  "main": {
+   "sha": "7725ad086c05c105a1dbe99e1df2014f0143372e",
+   "deploy": {
+    "conclusion": "success",
+    "sha": "7725ad086c05c105a1dbe99e1df2014f0143372e",
+    "status": "completed",
+    "url": "https://github.com/acme/shop/actions/runs/38863607045"
+   }
+  },
+  "health": {
+   "ok": true,
+   "checked": 1792136611
+  }
+ },
+ "models": {
+  "v": 1,
+  "updated": 1792135759,
+  "free": [
+   {
+    "id": "opencode/big-pickle",
+    "name": "Big Pickle",
+    "context": 200000,
+    "output": 32000,
+    "trains_on_data": null
+   },
+   {
+    "id": "opencode/cat-jam-free",
+    "name": "Cat Jam Free",
+    "context": 1048576,
+    "output": 131072,
+    "trains_on_data": null
+   },
+   {
+    "id": "opencode/deepseek-v4.1-flash-free",
+    "name": "DeepSeek V4.1 Flash Free",
+    "context": 200000,
+    "output": 32000,
+    "trains_on_data": false
+   },
+   {
+    "id": "opencode/glm-5.3-flash-free",
+    "name": "GLM-5.3-Flash Free",
+    "context": 200000,
+    "output": 32000,
+    "trains_on_data": null
+   },
+   {
+    "id": "opencode/ll-alpha-free",
+    "name": "LL Alpha Free",
+    "context": 262144,
+    "output": 65536,
+    "trains_on_data": null
+   },
+   {
+    "id": "opencode/longcat-2.5-preview-free",
+    "name": "LongCat 2.5 Preview Free",
+    "context": 1000000,
+    "output": 131072,
+    "trains_on_data": false
+   },
+   {
+    "id": "opencode/mimo-v2.6-flash-free",
+    "name": "MiMo-V2.6-Flash Free",
+    "context": 200000,
+    "output": 32000,
+    "trains_on_data": null
+   },
+   {
+    "id": "opencode/muse-spark-1.2-contributor-free",
+    "name": "Muse Spark 1.2 Free",
+    "context": 1048576,
+    "output": 131072,
+    "trains_on_data": true
+   },
+   {
+    "id": "opencode/muse-spark-1.3-contributor-free",
+    "name": "Muse Spark 1.3 Free",
+    "context": 1048576,
+    "output": 131072,
+    "trains_on_data": true
+   },
+   {
+    "id": "opencode/nemotron-3.5-lightning-free",
+    "name": "Nemotron 3.5 Lightning Free",
+    "context": 262144,
+    "output": 262144,
+    "trains_on_data": null
+   },
+   {
+    "id": "opencode/nemotron-3.5-super-vl-free",
+    "name": "Nemotron 3.5 Super VL Free",
+    "context": 1048576,
+    "output": 131072,
+    "trains_on_data": null
+   },
+   {
+    "id": "opencode/space-bunny-free",
+    "name": "Space Bunny Free",
+    "context": 1048576,
+    "output": 524288,
+    "trains_on_data": false
+   }
+  ],
+  "cooldown": {},
+  "source_ok": {
+   "zen": true,
+   "modelsdev": true
+  }
+ },
+ "halt": null,
+ "consumed": {},
+ "metrics": {
+  "merged_total": 1,
+  "merged_24h": 1,
+  "merged_7d": 1,
+  "remaining": 65,
+  "throughput_per_h": 0.021,
+  "eta_h": null,
+  "eta": null,
+  "waste_per_productive_h_7d": null,
+  "success": {
+   "opencode/muse-spark-1.3-contributor-free": {
+    "attempts": 2,
+    "merged": 0,
+    "rate": 0
+   },
+   "opencode/deepseek-v4.1-flash-free": {
+    "attempts": 2,
+    "merged": 1,
+    "rate": 0.5
+   }
+  },
+  "stage_median_min": {
+   "pick": 0.1,
+   "plan": 5.9
+  },
+  "bottleneck": "plan",
+  "tokens_today": {
+   "input": 669831,
+   "output": 71435,
+   "cache_read": 21098112
+  },
+  "rate_limited_1h": 0
+ },
+ "recent": [
+  {
+   "ts": 1792136602,
+   "issue": 26,
+   "slot": 1,
+   "outcome": "waiting",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "url": null
+  },
+  {
+   "ts": 1792134737,
+   "issue": 24,
+   "slot": 1,
+   "outcome": "waiting",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "url": null
+  },
+  {
+   "ts": 1792133494,
+   "issue": 24,
+   "slot": 1,
+   "outcome": "merged",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "url": null
+  },
+  {
+   "ts": 1792132863,
+   "issue": 24,
+   "slot": 1,
+   "outcome": "pr",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "url": "https://github.com/acme/shop/pull/136"
+  },
+  {
+   "ts": 1792129986,
+   "issue": 23,
+   "slot": 1,
+   "outcome": "blocked",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "url": null
+  },
+  {
+   "ts": 1792129530,
+   "issue": 21,
+   "slot": 1,
+   "outcome": "blocked",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "url": null
+  },
+  {
+   "ts": 1791461413,
+   "issue": 15,
+   "slot": 1,
+   "outcome": "pr",
+   "model": "opencode/muse-spark-1.3-contributor-free",
+   "url": "https://github.com/acme/shop/pull/131"
+  },
+  {
+   "ts": 1791460511,
+   "issue": 13,
+   "slot": 1,
+   "outcome": "pr",
+   "model": "opencode/muse-spark-1.3-contributor-free",
+   "url": "https://github.com/acme/shop/pull/130"
+  }
+ ]
+}

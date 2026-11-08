@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Test stub: Git Bash has no flock. The tests are single-process, so "got the lock" is always true.
+exit 0

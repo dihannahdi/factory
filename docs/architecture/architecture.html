@@ -1,0 +1,524 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>factory architecture</title><meta name="viewport" content="width=1920"><style>html,body{margin:0;background:#0b0e13}svg{display:block}</style></head><body><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1200" width="1920" height="1200">
+<defs><marker id="ma" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0.5 1.2 L9.5 5 L0.5 8.8z" fill="#ffb224"/></marker><marker id="mc" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0.5 1.2 L9.5 5 L0.5 8.8z" fill="#5cc8ff"/></marker><marker id="mg" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0.5 1.2 L9.5 5 L0.5 8.8z" fill="#8a96a8"/></marker><marker id="mr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0.5 1.2 L9.5 5 L0.5 8.8z" fill="#ff6b6b"/></marker><pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="0.8" fill="#1a2029"/></pattern></defs>
+<rect width="1920" height="1200" fill="#0b0e13"/><rect width="1920" height="1200" fill="url(#dots)"/>
+<text x="20" y="42" font-size="27" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">factory · autonomous pipeline · one Linux box</text>
+<text x="20" y="66" font-size="12" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="0.4">ARCHITECTURE MAP  ·  issue in, reviewed PR out (MERGE_MODE=auto: merged and live)</text>
+<text x="20" y="86" font-size="11" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">≈$0.25–0.5 / issue on Go models (measured from token logs); $0 on free models</text>
+<rect x="1010" y="16" width="150" height="76" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="1024" y="55" font-size="30" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">3</text>
+<text x="1024" y="80" font-size="11" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">parallel lanes</text>
+<rect x="1172" y="16" width="250" height="76" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="1186" y="55" font-size="30" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">$10</text>
+<text x="1186" y="80" font-size="11" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Go / month · budget $14 / 5h</text>
+<rect x="1434" y="16" width="270" height="76" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="1448" y="55" font-size="30" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">≈2.9/h</text>
+<text x="1448" y="80" font-size="11" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">merges · 1 CI runner</text>
+<rect x="1716" y="16" width="184" height="76" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="1730" y="55" font-size="30" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">1.4</text>
+<text x="1730" y="80" font-size="11" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">console exposure</text>
+<text x="15" y="134" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1.5">OUTSIDE</text>
+<rect x="15" y="154" width="150" height="56" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<g stroke="#8a96a8" stroke-width="1.3" fill="none"><circle cx="32" cy="168" r="2.8"/><path d="M26.5 177 q5.5 -8 11 0"/></g>
+<text x="45" y="176" font-size="13" fill="#d7dde6" font-weight="600" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">Browser / phone</text>
+<text x="25" y="196" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">owner</text>
+<rect x="15" y="252" width="150" height="56" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<path d="M28 274 A3.5 3.5 0 0 1 28.5 267 A5 5 0 0 1 38 268 A3 3 0 0 1 38 274Z" fill="none" stroke="#8a96a8" stroke-width="1.3"/>
+<text x="45" y="274" font-size="13" fill="#d7dde6" font-weight="600" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">CDN (optional)</text>
+<text x="25" y="294" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">proxy · TLS</text>
+<path d="M60 210 V252" fill="none" stroke="#5cc8ff" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mc)"/>
+<path d="M120 252 V210" fill="none" stroke="#8a96a8" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)"/>
+<text x="66" y="236" font-size="10.5" fill="#5cc8ff" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">login</text>
+<text x="126" y="236" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">SSE</text>
+<path d="M165 270 H220" fill="none" stroke="#5cc8ff" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mc)"/>
+<path d="M220 296 H165" fill="none" stroke="#8a96a8" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)"/>
+<text x="170" y="264" font-size="10.5" fill="#5cc8ff" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">ctl</text>
+<text x="170" y="311" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">live</text>
+<rect x="34" y="455" width="131" height="375" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<g stroke="#8a96a8" stroke-width="1.3" fill="none"><circle cx="49" cy="472" r="6"/><circle cx="49" cy="470" r="1.6"/><path d="M49 471.6 V475 M49 474 q3 0 3 -3"/></g>
+<text x="62" y="477" font-size="14" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">GitHub</text>
+<text x="42" y="498" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">owner/</text>
+<text x="42" y="511" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">repo</text>
+<text x="42" y="530" font-size="12" fill="#d7dde6" font-weight="600" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">Issues</text>
+<text x="42" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">open issues</text>
+<text x="42" y="560" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">M1–M3</text>
+<text x="42" y="610" font-size="12" fill="#d7dde6" font-weight="600" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">PRs</text>
+<text x="42" y="625" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">label agent</text>
+<text x="42" y="640" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">agent-reviewed</text>
+<text x="42" y="655" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">label agent-adopt</text>
+<text x="42" y="700" font-size="12" fill="#d7dde6" font-weight="600" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">Actions</text>
+<text x="42" y="715" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">ci.yml</text>
+<text x="42" y="730" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">validation.yml</text>
+<text x="42" y="745" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">deploy.yml</text>
+<rect x="24" y="842" width="141" height="112" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="32" y="861" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">OpenCode Go</text>
+<text x="32" y="876" font-size="9.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">PRIMARY · $10 / month</text>
+<text x="32" y="888" font-size="9.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">opencode-go/</text>
+<text x="32" y="900" font-size="9.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">deepseek-v4.1-flash</text>
+<text x="32" y="912" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">region Global</text>
+<text x="32" y="924" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">/etc/opencode/go.key</text>
+<text x="32" y="936" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">root:factory 0640</text>
+<text x="32" y="948" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">never env / auth.json</text>
+<rect x="24" y="962" width="141" height="84" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="32" y="980" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">OpenCode Zen</text>
+<text x="32" y="994" font-size="9.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">FALLBACK · Zen free</text>
+<text x="32" y="1006" font-size="9.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">opencode/deepseek-</text>
+<text x="32" y="1018" font-size="9.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">v4.1-flash-free</text>
+<text x="32" y="1030" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">anonymous</text>
+<text x="32" y="1042" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">throttled per IP</text>
+<rect x="205" y="108" width="1495" height="1076" rx="16" fill="none" stroke="#3a4558" stroke-width="1.5"/>
+<rect x="224" y="100" width="410" height="18" rx="0" fill="#0b0e13" stroke="none" stroke-width="1"/>
+<text x="232" y="113" font-size="11" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">one Linux server · systemd · the reference box: 12 cores · 47 GB</text>
+<text x="232" y="136" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">D · CONSOLE</text>
+<text x="572" y="134" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">C · SHARED STATE</text>
+<text x="1127" y="136" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">A · ROOT · SYNC + STATE</text>
+<rect x="220" y="158" width="290" height="272" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<g stroke="#d7dde6" stroke-width="1.3" fill="none"><circle cx="237" cy="175" r="3"/><circle cx="237" cy="175" r="6" stroke-dasharray="2.2 1.6"/></g>
+<text x="252" y="181" font-size="14" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">factory-console</text>
+<text x="502" y="181" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="end">Node 22</text>
+<text x="232" y="200" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">127.0.0.1:4420 · NO egress</text>
+<text x="232" y="215" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">user factory-console · sandboxed</text>
+<text x="232" y="231" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Apache vhost factory.example.com · LE</text>
+<rect x="230" y="244" width="64" height="18" rx="5" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="262" y="256.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">login</text>
+<rect x="298" y="244" width="64" height="18" rx="5" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="330" y="256.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">state</text>
+<rect x="366" y="244" width="64" height="18" rx="5" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="398" y="256.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">stream</text>
+<rect x="434" y="244" width="64" height="18" rx="5" fill="#161b24" stroke="#5cc8ff" stroke-width="1"/>
+<text x="466" y="256.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">control</text>
+<rect x="230" y="266" width="64" height="18" rx="5" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="262" y="278.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">issues</text>
+<rect x="298" y="266" width="64" height="18" rx="5" fill="#161b24" stroke="#5cc8ff" stroke-width="1"/>
+<text x="330" y="278.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">interrupt</text>
+<rect x="366" y="266" width="64" height="18" rx="5" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="398" y="278.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">inspect</text>
+<rect x="434" y="266" width="64" height="18" rx="5" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="466" y="278.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">replay</text>
+<text x="232" y="306" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">scrypt · global rate limit</text>
+<text x="232" y="319" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">SSE · 15 s ping</text>
+<rect x="230" y="332" width="270" height="90" rx="6" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="240" y="350" font-size="12" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">Foundry UI</text>
+<text x="240" y="368" font-size="11" fill="#8a96a8" font-weight="400" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">live machine · steer / stop</text>
+<text x="240" y="383" font-size="11" fill="#8a96a8" font-weight="400" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">agents 0–3 · models · issue board</text>
+<text x="240" y="398" font-size="11" fill="#8a96a8" font-weight="400" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">inspect · replay · auto-tour</text>
+<text x="240" y="413" font-size="11" fill="#5cc8ff" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Deck: Go $x / $14 · 5h</text>
+<rect x="414" y="337" width="78" height="16" rx="5" fill="#11151c" stroke="#8a96a8" stroke-width="1"/>
+<text x="453" y="348.325" font-size="9.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">browser UI</text>
+<path d="M510 300 H560" fill="none" stroke="#5cc8ff" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mc)"/>
+<text x="513" y="294" font-size="10.5" fill="#5cc8ff" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">writes</text>
+<rect x="560" y="158" width="165" height="272" rx="8" fill="#11151c" stroke="#5cc8ff" stroke-width="1.2" stroke-opacity="0.8"/>
+<text x="572" y="180" font-size="14" fill="#5cc8ff" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">ctl/</text>
+<text x="572" y="196" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">console writes</text>
+<text x="572" y="209" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">root validates</text>
+<text x="572" y="232" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">control.json</text>
+<text x="586" y="248" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">agents</text>
+<text x="586" y="263" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">models</text>
+<text x="586" y="278" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">queue · skip</text>
+<text x="586" y="293" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">pause · resume</text>
+<text x="572" y="326" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">interrupt-K.json</text>
+<text x="586" y="342" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">stop · steer</text>
+<text x="572" y="372" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">K = lane 1..3</text>
+<rect x="740" y="158" width="150" height="272" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="752" y="180" font-size="14" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">logs</text>
+<text x="752" y="196" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">root writes</text>
+<text x="752" y="224" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">/var/log/</text>
+<text x="752" y="237" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">factory/</text>
+<text x="752" y="250" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">issue-N-…-sK/</text>
+<text x="764" y="274" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">turn events.jsonl</text>
+<text x="764" y="290" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">plan.json</text>
+<text x="764" y="306" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">checklist.json</text>
+<text x="764" y="322" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">verify logs</text>
+<rect x="905" y="158" width="175" height="272" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="917" y="180" font-size="14" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">ui/</text>
+<text x="917" y="196" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">root writes</text>
+<text x="917" y="209" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">/var/lib/factory-ops</text>
+<text x="917" y="238" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">slots/1..3.json</text>
+<text x="917" y="258" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">github.json</text>
+<text x="917" y="278" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">models.json</text>
+<text x="917" y="298" font-size="11" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">halt.json</text>
+<text x="917" y="318" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">consumed.json</text>
+<text x="917" y="338" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">stats.jsonl</text>
+<path d="M480 146 V158" fill="none" stroke="#8a96a8" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round"/>
+<path d="M815 158 V146 H480 V158" fill="none" stroke="#8a96a8" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)"/>
+<path d="M990 158 V146 H815" fill="none" stroke="#8a96a8" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round"/>
+<text x="830" y="141" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">console reads</text>
+<rect x="1115" y="158" width="270" height="272" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<g stroke="#8a96a8" stroke-width="1.3" fill="none"><circle cx="1132" cy="173" r="3"/><circle cx="1132" cy="173" r="6" stroke-dasharray="2.2 1.6"/></g>
+<text x="1147" y="180" font-size="14" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">sync.sh</text>
+<text x="1377" y="180" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="end">every 60 s</text>
+<text x="1127" y="197" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">factory-sync.timer</text>
+<text x="1127" y="222" font-size="11.5" fill="#d7dde6" font-weight="600" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">github.json</text>
+<text x="1127" y="236" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">issues · PRs · CI status</text>
+<text x="1127" y="262" font-size="11.5" fill="#d7dde6" font-weight="600" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">models.json</text>
+<text x="1127" y="276" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">spend vs budget → ui/models.json</text>
+<text x="1127" y="291" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">Go caps $16/5 h · $40/wk · $80/mo</text>
+<text x="1127" y="318" font-size="11.5" fill="#d7dde6" font-weight="600" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">unblock deps</text>
+<text x="1127" y="340" font-size="11.5" fill="#d7dde6" font-weight="600" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">claim GC</text>
+<text x="1127" y="362" font-size="11.5" fill="#d7dde6" font-weight="600" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">halt checks</text>
+<rect x="1127" y="376" width="246" height="18" rx="5" fill="#161b24" stroke="#ff6b6b" stroke-width="1"/>
+<text x="1250" y="388.5" font-size="10" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">eligible: documented zero-retention only</text>
+<rect x="1127" y="400" width="246" height="18" rx="5" fill="#161b24" stroke="#ff6b6b" stroke-width="1"/>
+<text x="1250" y="412.5" font-size="10" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">halt: non-Go model cost &gt; 0</text>
+<path d="M1366 197 L1372 199 V204 C1372 208 1369 210 1366 211 C1363 210 1360 208 1360 204 V199Z" fill="none" stroke="#ff6b6b" stroke-width="1.3"/>
+<path d="M1115 300 H1080" fill="none" stroke="#8a96a8" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)"/>
+<text x="1087" y="294" font-size="12" fill="#d7dde6" font-weight="400" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start"></text>
+<rect x="1405" y="158" width="130" height="272" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<g stroke="#d7dde6" stroke-width="1.4" fill="none"><circle cx="1417" cy="170" r="3.2"/><path d="M1420 173 L1427 180 M1424 177 l2 -2"/></g>
+<text x="1433" y="180" font-size="14" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">locks</text>
+<text x="1415" y="197" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">acquire in order</text>
+<rect x="1417" y="212" width="106" height="34" rx="5" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="1470" y="232.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">merge</text>
+<text x="1423" y="224" font-size="9" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">1</text>
+<path d="M1470 246 V256" fill="none" stroke="#8a96a8" stroke-width="1.2" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)"/>
+<rect x="1417" y="256" width="106" height="34" rx="5" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="1470" y="276.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">claim</text>
+<text x="1423" y="268" font-size="9" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">2</text>
+<path d="M1470 290 V300" fill="none" stroke="#8a96a8" stroke-width="1.2" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)"/>
+<rect x="1417" y="300" width="106" height="34" rx="5" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="1470" y="320.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">mirror</text>
+<text x="1423" y="312" font-size="9" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">3</text>
+<path d="M1470 334 V344" fill="none" stroke="#8a96a8" stroke-width="1.2" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)"/>
+<rect x="1417" y="344" width="106" height="34" rx="5" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="1470" y="364.5" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">stats/cooldown</text>
+<text x="1423" y="356" font-size="9" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">4</text>
+<rect x="1555" y="158" width="135" height="272" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<g stroke="#d7dde6" stroke-width="1.3" fill="none"><ellipse cx="1569" cy="169" rx="5.5" ry="2.5"/><path d="M1563.5 169 V177 C1563.5 180 1574.5 180 1574.5 177 V169"/></g>
+<text x="1583" y="180" font-size="14" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">state</text>
+<text x="1565" y="197" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">/var/lib/</text>
+<text x="1565" y="210" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">factory</text>
+<text x="1565" y="223" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">root · 700</text>
+<text x="1565" y="252" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">claims</text>
+<text x="1565" y="274" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">cooldown / model</text>
+<text x="1565" y="296" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">sessions</text>
+<text x="1565" y="318" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">blocked deps</text>
+<text x="1565" y="340" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">lock files</text>
+<text x="1565" y="362" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">spend.jsonl · Go</text>
+<rect x="1720" y="158" width="180" height="62" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="1732" y="180" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">models.dev</text>
+<text x="1732" y="198" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">price catalogue</text>
+<text x="1732" y="211" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">free ⇔ cost = 0</text>
+<path d="M1720 190 H1710 V146 H1250 V158" fill="none" stroke="#8a96a8" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)"/>
+<text x="1500" y="141" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">prices</text>
+<rect x="1720" y="470" width="180" height="150" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="1732" y="490" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1.5">LEGEND</text>
+<path d="M1732 512 H1772" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<text x="1782" y="516" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">agent path</text>
+<path d="M1732 538 H1772" fill="none" stroke="#5cc8ff" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mc)"/>
+<text x="1782" y="542" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">control (console)</text>
+<path d="M1732 564 H1772" fill="none" stroke="#ff6b6b" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mr)"/>
+<text x="1782" y="568" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">safety guard</text>
+<path d="M1732 590 H1772" fill="none" stroke="#8a96a8" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)"/>
+<text x="1782" y="594" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">telemetry / data</text>
+<rect x="1720" y="640" width="180" height="100" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="1732" y="660" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1.5">THROUGHPUT</text>
+<text x="1732" y="686" font-size="22" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">≈21</text>
+<text x="1772" y="686" font-size="11" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">runner-min</text>
+<text x="1732" y="704" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">/ merged issue</text>
+<text x="1732" y="726" font-size="11.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">→ ≤ 3 agents</text>
+<rect x="220" y="455" width="1470" height="300" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="232" y="475" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">A · ROOT · LANES</text>
+<text x="400" y="475" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">factory.slice · 800 % CPU · 24 GB</text>
+<text x="700" y="475" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">run.sh --slot K · 1 issue per lane · re-run 2 min after prev ends</text>
+<rect x="1230" y="463" width="262" height="18" rx="5" fill="#161b24" stroke="#ff6b6b" stroke-width="1"/>
+<text x="1361" y="475.325" font-size="9.5" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">guard: no .github/ · deploy/ · old migrations</text>
+<rect x="1500" y="463" width="180" height="18" rx="5" fill="#161b24" stroke="#ff6b6b" stroke-width="1"/>
+<text x="1590" y="475.325" font-size="9.5" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">stop ≠ agent-failed</text>
+<rect x="228" y="489" width="1454" height="1" rx="0" fill="#2a3240" stroke="none" stroke-width="1"/>
+<rect x="228" y="505" width="150" height="54" rx="8" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="238" y="521" font-size="12" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">LANE 1</text>
+<text x="238" y="536" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">factory@1.timer</text>
+<text x="238" y="549" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">→ run.sh --slot 1</text>
+<path d="M165 528 H228" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<path d="M378 532 H388" fill="none" stroke="#ffb224" stroke-width="1.4" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="498" y="500" width="588" height="64" rx="8" fill="none" stroke="#8a96a8" stroke-width="1" stroke-dasharray="4 3"/>
+<rect x="506" y="494" width="78" height="12" rx="0" fill="#11151c" stroke="none" stroke-width="1"/>
+<text x="508" y="504" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">sandbox s1</text>
+<rect x="388" y="509" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="443.5" y="529" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">pick</text>
+<text x="443.5" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">queue→PR→issue</text>
+<path d="M499 532 H505" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="505" y="509" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="560.5" y="529" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">plan</text>
+<text x="560.5" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">plan.json</text>
+<path d="M616 532 H622" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="622" y="509" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="677.5" y="529" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">build</text>
+<text x="677.5" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">opencode · Go</text>
+<path d="M733 532 H739" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="739" y="509" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="794.5" y="529" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">complete</text>
+<text x="794.5" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">≤4 rounds</text>
+<path d="M850 532 H856" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="856" y="509" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="911.5" y="529" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">verify</text>
+<text x="911.5" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">cargo · npm · pg</text>
+<path d="M967 532 H973" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="973" y="509" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1028.5" y="529" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">review</text>
+<text x="1028.5" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">fresh session</text>
+<path d="M1084 532 H1090" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1090" y="509" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1145.5" y="529" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">PR</text>
+<text x="1145.5" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">agent label</text>
+<path d="M1201 532 H1207" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1207" y="509" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1262.5" y="529" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">CI</text>
+<text x="1262.5" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">runner</text>
+<path d="M1318 532 H1324" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1324" y="509" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1379.5" y="529" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">merge</text>
+<text x="1379.5" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">merge.lock</text>
+<path d="M1435 532 H1441" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1441" y="509" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1496.5" y="529" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">deploy</text>
+<text x="1496.5" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">deploy.yml</text>
+<path d="M1552 532 H1558" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1558" y="509" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1613.5" y="529" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">live</text>
+<text x="1613.5" y="545" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">health ok</text>
+<rect x="228" y="589" width="150" height="54" rx="8" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="238" y="605" font-size="12" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">LANE 2</text>
+<text x="238" y="620" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">factory@2.timer</text>
+<text x="238" y="633" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">→ run.sh --slot 2</text>
+<path d="M200 612 H228" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<path d="M378 616 H388" fill="none" stroke="#ffb224" stroke-width="1.4" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="498" y="584" width="588" height="64" rx="8" fill="none" stroke="#8a96a8" stroke-width="1" stroke-dasharray="4 3"/>
+<rect x="506" y="578" width="78" height="12" rx="0" fill="#11151c" stroke="none" stroke-width="1"/>
+<text x="508" y="588" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">sandbox s2</text>
+<rect x="388" y="593" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="443.5" y="621" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">pick</text>
+<path d="M499 616 H505" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="505" y="593" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="560.5" y="621" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">plan</text>
+<path d="M616 616 H622" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="622" y="593" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="677.5" y="621" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">build</text>
+<path d="M733 616 H739" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="739" y="593" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="794.5" y="621" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">complete</text>
+<path d="M850 616 H856" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="856" y="593" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="911.5" y="621" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">verify</text>
+<path d="M967 616 H973" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="973" y="593" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1028.5" y="621" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">review</text>
+<path d="M1084 616 H1090" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1090" y="593" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1145.5" y="621" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">PR</text>
+<path d="M1201 616 H1207" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1207" y="593" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1262.5" y="621" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">CI</text>
+<path d="M1318 616 H1324" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1324" y="593" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1379.5" y="621" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">merge</text>
+<path d="M1435 616 H1441" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1441" y="593" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1496.5" y="621" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">deploy</text>
+<path d="M1552 616 H1558" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1558" y="593" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1613.5" y="621" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">live</text>
+<rect x="228" y="673" width="150" height="54" rx="8" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="238" y="689" font-size="12" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">LANE 3</text>
+<text x="238" y="704" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">factory@3.timer</text>
+<text x="238" y="717" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">→ run.sh --slot 3</text>
+<path d="M200 696 H228" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<path d="M200 528 V696" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M165 652 H200" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-linejoin="round" marker-end="url(#ma)" stroke-dasharray="4 3"/>
+<text x="167" y="646" font-size="9.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">adopt</text>
+<path d="M378 700 H388" fill="none" stroke="#ffb224" stroke-width="1.4" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="498" y="668" width="588" height="64" rx="8" fill="none" stroke="#8a96a8" stroke-width="1" stroke-dasharray="4 3"/>
+<rect x="506" y="662" width="78" height="12" rx="0" fill="#11151c" stroke="none" stroke-width="1"/>
+<text x="508" y="672" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">sandbox s3</text>
+<rect x="388" y="677" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="443.5" y="705" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">pick</text>
+<path d="M499 700 H505" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="505" y="677" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="560.5" y="705" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">plan</text>
+<path d="M616 700 H622" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="622" y="677" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="677.5" y="705" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">build</text>
+<path d="M733 700 H739" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="739" y="677" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="794.5" y="705" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">complete</text>
+<path d="M850 700 H856" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="856" y="677" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="911.5" y="705" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">verify</text>
+<path d="M967 700 H973" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="973" y="677" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1028.5" y="705" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">review</text>
+<path d="M1084 700 H1090" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1090" y="677" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1145.5" y="705" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">PR</text>
+<path d="M1201 700 H1207" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1207" y="677" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1262.5" y="705" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">CI</text>
+<path d="M1318 700 H1324" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1324" y="677" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1379.5" y="705" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">merge</text>
+<path d="M1435 700 H1441" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1441" y="677" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1496.5" y="705" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">deploy</text>
+<path d="M1552 700 H1558" fill="none" stroke="#ffb224" stroke-width="1.6" stroke-opacity="1" stroke-linejoin="round"/>
+<rect x="1558" y="677" width="111" height="46" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1613.5" y="705" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="middle">live</text>
+<text x="232" y="747" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">same track × 3 · one issue each · lanes never share a claim · pick order: console queue → adopted PRs → fresh issues · skips “Depends on #N” (open, or plan depends_on) before any plan turn</text>
+<text x="172" y="518" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">issues</text>
+<path d="M640 430 V455" fill="none" stroke="#5cc8ff" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mc)"/>
+<text x="648" y="446" font-size="10.5" fill="#5cc8ff" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">control</text>
+<path d="M815 455 V430" fill="none" stroke="#8a96a8" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)"/>
+<text x="823" y="446" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">events</text>
+<path d="M990 455 V430" fill="none" stroke="#8a96a8" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)"/>
+<text x="998" y="446" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">slots · stats</text>
+<path d="M1620 455 V430" fill="none" stroke="#8a96a8" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mg)" marker-start="url(#mg)"/>
+<text x="1560" y="446" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="end">claims</text>
+<text x="1087" y="294" font-size="12" fill="#d7dde6" font-weight="400" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start"></text>
+<rect x="240" y="766" width="300" height="34" rx="8" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<g stroke="#ffb224" stroke-width="1.3" fill="none"><ellipse cx="254" cy="778" rx="5.5" ry="2.5"/><path d="M248.5 778 V786 C248.5 789 259.5 789 259.5 786 V778"/></g>
+<text x="268" y="780" font-size="12" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">mirror.git</text>
+<text x="350" y="780" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">bare · /opt/factory</text>
+<text x="268" y="793" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">GH token: root only · /etc/factory</text>
+<path d="M240 783 H165" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<text x="172" y="777" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">push</text>
+<path d="M400 820 V800" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<text x="408" y="814" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">bundle</text>
+<path d="M600 755 V820" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<text x="594" y="790" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="end">spawn</text>
+<path d="M220 892 H165" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)" marker-start="url(#ma)"/>
+<text x="170" y="886" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">egress</text>
+<g></g>
+<rect x="220" y="988" width="1470" height="190" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="232" y="1008" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">E · CI/CD · same box</text>
+<rect x="240" y="1020" width="330" height="130" rx="8" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<g stroke="#d7dde6" stroke-width="1.3" fill="none"><circle cx="257" cy="1038" r="3"/><circle cx="257" cy="1038" r="6" stroke-dasharray="2.2 1.6"/></g>
+<text x="272" y="1045" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">Actions runner</text>
+<text x="250" y="1066" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">self-hosted · ×1</text>
+<text x="250" y="1084" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">REAL LIMIT</text>
+<text x="250" y="1104" font-size="20" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">≈21 min</text>
+<text x="348" y="1104" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">per merged issue</text>
+<text x="250" y="1127" font-size="14" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">≈2.9 merges/h</text>
+<text x="250" y="1143" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">→ max 3 agents</text>
+<rect x="650" y="1020" width="300" height="130" rx="8" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="662" y="1045" font-size="13" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">your deploy script</text>
+<text x="662" y="1070" font-size="11" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">build on box</text>
+<text x="662" y="1088" font-size="11" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">publish + restart</text>
+<text x="662" y="1106" font-size="11" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">shop-api restart</text>
+<text x="662" y="1138" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">triggered by deploy.yml</text>
+<path d="M570 1070 H650" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<text x="576" y="1064" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">deploy.yml</text>
+<rect x="1030" y="1020" width="240" height="130" rx="8" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="1042" y="1045" font-size="13" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">shop-api</text>
+<text x="1042" y="1064" font-size="11" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Axum :4390</text>
+<rect x="1042" y="1080" width="216" height="22" rx="5" fill="#161b24" stroke="#ffb224" stroke-width="1"/>
+<text x="1150" y="1094.85" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">health check</text>
+<text x="1042" y="1122" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">ok → live</text>
+<text x="1042" y="1140" font-size="10.5" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">fail → rollback + halt</text>
+<path d="M950 1070 H1030" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<path d="M1150 1150 V1168 H800 V1150" fill="none" stroke="#ff6b6b" stroke-width="1.2" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#mr)"/>
+<text x="975" y="1162" font-size="10.5" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">auto-rollback</text>
+<text x="975" y="1172" font-size="12" fill="#d7dde6" font-weight="400" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start"></text>
+<path d="M1270 1050 H1720" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<text x="1500" y="1044" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">serve</text>
+<rect x="1310" y="1074" width="370" height="76" rx="7" fill="#161b24" stroke="#ff6b6b" stroke-width="1" stroke-opacity="0.8"/>
+<path d="M1328 1082 L1334 1084 V1089 C1334 1093 1331 1095 1328 1096 C1325 1095 1322 1093 1322 1089 V1084Z" fill="none" stroke="#ff6b6b" stroke-width="1.3"/>
+<text x="1342" y="1094" font-size="10" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">SAFETY · HALT</text>
+<text x="1322" y="1117" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">failed deploy or unhealthy site</text>
+<text x="1322" y="1136" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">→ halt.json · agents stop picking</text>
+<path d="M1496.5 723 V975 H480 V1022" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<text x="1504.5" y="790" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">deploy.yml</text>
+<text x="1100" y="970" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">all lanes → one runner</text>
+<path d="M240 1070 H14 V812 H34" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)" marker-start="url(#ma)"/>
+<text x="22" y="1062" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Actions · PR · CI</text>
+<rect x="1720" y="1020" width="180" height="56" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<path d="M1733 1042 A3.5 3.5 0 0 1 1733.5 1035 A5 5 0 0 1 1743 1036 A3 3 0 0 1 1743 1042Z" fill="none" stroke="#8a96a8" stroke-width="1.3"/>
+<text x="1752" y="1043" font-size="13" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">CDN (optional)</text>
+<text x="1730" y="1064" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">proxy · TLS</text>
+<rect x="1720" y="1116" width="180" height="58" rx="8" fill="#11151c" stroke="#ffb224" stroke-width="1.4"/>
+<text x="1732" y="1138" font-size="13" fill="#d7dde6" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">shop.example.com</text>
+<text x="1732" y="1158" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">your live product</text>
+<path d="M1810 1076 V1116" fill="none" stroke="#ffb224" stroke-width="1.5" stroke-opacity="1" stroke-linejoin="round" marker-end="url(#ma)"/>
+<text x="1818" y="1100" font-size="10.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">live</text>
+<rect x="220" y="820" width="1266" height="142" rx="8" fill="#11151c" stroke="#2a3240" stroke-width="1"/>
+<text x="232" y="839" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">B · SANDBOX · PER LANE</text>
+<text x="520" y="839" font-size="10.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">systemd-run transient unit · factory-sK.slice · user factory</text>
+<text x="960" y="839" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">config /etc/opencode/opencode.json · key via {file:…}</text>
+<rect x="232" y="852" width="104" height="100" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="242" y="872" font-size="14" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">s1</text>
+<text x="242" y="888" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">opencode run</text>
+<text x="242" y="901" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">cargo · npm</text>
+<text x="242" y="914" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">factory-pg-s1</text>
+<text x="242" y="929" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">300 % · 8 GB</text>
+<text x="242" y="943" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Go → free</text>
+<rect x="344" y="852" width="104" height="100" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="354" y="872" font-size="14" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">s2</text>
+<text x="354" y="888" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">opencode run</text>
+<text x="354" y="901" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">cargo · npm</text>
+<text x="354" y="914" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">factory-pg-s2</text>
+<text x="354" y="929" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">300 % · 8 GB</text>
+<text x="354" y="943" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Go → free</text>
+<rect x="456" y="852" width="104" height="100" rx="7" fill="#161b24" stroke="#ffb224" stroke-width="1.2"/>
+<text x="466" y="872" font-size="14" fill="#d7dde6" font-weight="700" font-family="Inter, system-ui, 'Segoe UI', sans-serif" text-anchor="start">s3</text>
+<text x="466" y="888" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">opencode run</text>
+<text x="466" y="901" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">cargo · npm</text>
+<text x="466" y="914" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">factory-pg-s3</text>
+<text x="466" y="929" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">300 % · 8 GB</text>
+<text x="466" y="943" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Go → free</text>
+<rect x="570" y="852" width="240" height="100" rx="7" fill="#161b24" stroke="#2a3240" stroke-width="1"/>
+<text x="580" y="871" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">SEES</text>
+<text x="618" y="871" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">/home/factory/sK</text>
+<text x="580" y="886" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">work · target · pg/ + toolchains</text>
+<text x="580" y="899" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">pg: factory-pg-sK · unix socket · no TCP</text>
+<text x="580" y="912" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">bins /usr/local/lib/factory-pg16</text>
+<text x="580" y="925" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">TEST_DATABASE_URL → sandbox</text>
+<text x="580" y="938" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">agent + root verify run CI's DB tests</text>
+<rect x="820" y="852" width="230" height="100" rx="7" fill="#161b24" stroke="#ff6b6b" stroke-width="1" stroke-opacity="0.8"/>
+<path d="M836 860 L842 862 V867 C842 871 839 873 836 874 C833 873 830 871 830 867 V862Z" fill="none" stroke="#ff6b6b" stroke-width="1.3"/>
+<text x="850" y="872" font-size="10" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">HIDDEN</text>
+<text x="830" y="892" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">/opt  /www  /var/lib</text>
+<text x="830" y="907" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">/etc/factory</text>
+<text x="830" y="922" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">/etc/factory-console</text>
+<rect x="830" y="930" width="210" height="16" rx="5" fill="#11151c" stroke="#ff6b6b" stroke-width="1"/>
+<text x="935" y="941.2" font-size="9" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="middle">IP deny: localhost · private · own IP</text>
+<rect x="1060" y="852" width="414" height="100" rx="7" fill="#161b24" stroke="#ff6b6b" stroke-width="1" stroke-opacity="0.8"/>
+<path d="M1076 860 L1082 862 V867 C1082 871 1079 873 1076 874 C1073 873 1070 871 1070 867 V862Z" fill="none" stroke="#ff6b6b" stroke-width="1.3"/>
+<text x="1090" y="872" font-size="10" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">TURN WATCHDOG</text>
+<text x="1205" y="872" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">in the lane's interruptible sandbox call</text>
+<text x="1072" y="884" font-size="9.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">opencode --print-logs --log-level WARN</text>
+<text x="1072" y="895.5" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">stderr “Rate limit exceeded” + no new events 20 s, or</text>
+<text x="1072" y="907" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">no events and no unit CPU 900 s  →  SIGTERM the turn</text>
+<text x="1072" y="918.5" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">session kept · model cooled · same session resumes on next model</text>
+<rect x="1072" y="923" width="390" height="1" fill="#2a3240"/>
+<text x="1072" y="934" font-size="9.5" fill="#ffb224" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">INTERNET egress open: webfetch + curl · official sources only</text>
+<text x="1072" y="945" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">record URL + access date in the PR</text>
+<rect x="1508" y="820" width="182" height="142" rx="8" fill="#11151c" stroke="#ff6b6b" stroke-width="1" stroke-opacity="0.8"/>
+<path d="M1524 830 L1530 832 V837 C1530 841 1527 843 1524 844 C1521 843 1518 841 1518 837 V832Z" fill="none" stroke="#ff6b6b" stroke-width="1.3"/>
+<text x="1536" y="844" font-size="10" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">MONEY GUARD</text>
+<text x="1518" y="860" font-size="9.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">non-Go model cost &gt; 0</text>
+<text x="1518" y="872" font-size="9.5" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">→ halt all lanes</text>
+<text x="1518" y="889" font-size="9.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Go turns → ledger</text>
+<text x="1518" y="901" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">spend.jsonl (root)</text>
+<text x="1518" y="913" font-size="9.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">$14/5h · $30/wk · $64/mo</text>
+<text x="1518" y="930" font-size="9.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">over → Go cools down</text>
+<text x="1518" y="942" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">→ free model, no halt</text>
+<text x="1518" y="956" font-size="9.5" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Zen key in env/auth → halt</text>
+<rect x="640" y="758" width="846" height="60" rx="6" fill="#11151c" stroke="#ffb224" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="652" y="770" font-size="9.5" fill="#ffb224" font-weight="700" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">ADOPT</text>
+<text x="696" y="770" font-size="9.5" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">human PR enters the same track (2nd entry, not a lane) · open · same repo · label agent-adopt · exactly one “Closes #N”</text>
+<text x="652" y="781" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">pick: checkout PR head, merge main into it (agent turn on conflicts, never rebase / force-push) · plan sees the PR diff</text>
+<text x="652" y="792" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">build: reviews the human's work against the issue, then completes only what is missing until .git/agent-checklist.json is full</text>
+<text x="652" y="803" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">review (fresh session) · push fast-forward only to the PR's own branch · one summary comment, body untouched · label agent → CI → merge → deploy</text>
+<text x="652" y="814" font-size="9.5" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">merge gate: checklist complete only, else a comment lists what is missing and the PR stays open · max 2 runs / PR head · never closed, branch kept</text>
+<text x="1084" y="575" font-size="9.5" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="end">verify result in · relevant tests only (cargo test -p &lt;crate&gt; &lt;filter&gt;) · root re-verifies</text>
+<text x="1290" y="1005" font-size="10" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">merge.lock released right after the merge</text>
+<text x="1290" y="1017" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">deploy wait + health check run outside it (uninterruptible)</text>
+<text x="1290" y="1029" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">cancelled run counts as deployed if a descendant's run succeeds</text>
+<rect x="1720" y="236" width="180" height="142" rx="8" fill="#11151c" stroke="#ff6b6b" stroke-width="1" stroke-opacity="0.8"/>
+<path d="M1736 244 L1742 246 V251 C1742 255 1739 257 1736 258 C1733 257 1730 255 1730 251 V246Z" fill="none" stroke="#ff6b6b" stroke-width="1.3"/>
+<text x="1748" y="257" font-size="10" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start" letter-spacing="1">ELIGIBLE MODELS</text>
+<text x="1732" y="276" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">documented zero</text>
+<text x="1732" y="290" font-size="11" fill="#d7dde6" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">retention only</text>
+<text x="1732" y="310" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">excluded:</text>
+<text x="1732" y="323" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">contributor-tier models</text>
+<text x="1732" y="335" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Nemotron · Big Pickle</text>
+<text x="1732" y="347" font-size="10" fill="#8a96a8" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">LL Alpha · MiMo · Exo</text>
+<text x="1732" y="363" font-size="10" fill="#ff6b6b" font-weight="400" font-family="ui-monospace, 'Cascadia Mono', Consolas, 'SF Mono', monospace" text-anchor="start">Cat Jam: retains 30 d</text>
+</svg></body></html>

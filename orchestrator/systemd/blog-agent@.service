@@ -1,0 +1,21 @@
+[Unit]
+Description=blog-agent lane %i: one unit of work (shepherd one PR, or one issue end to end)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# The second instance: the same /opt/factory code, configured only by this file (REPO, STATE, SLOTS,
+# AGENT_UNIT ...). Not optional ("-" would let a missing file run the lane with the first instance's defaults).
+# It applies to ExecStopPost too, so --cleanup knows which slots and which STATE are this instance's.
+EnvironmentFile=/etc/blog-agent/instance.env
+# Sandboxes are transient units that outlive a killed run.sh (systemd-run --wait does not stop
+# them when its client dies), so every start and every end of a lane stops the lane's slice. The
+# slice is factory-s<slot>.slice: the sandbox user and its slices are shared, the slot numbers are not.
+ExecStartPre=-/usr/bin/systemctl stop factory-s%i.slice
+ExecStart=/opt/factory/run.sh --slot %i
+ExecStopPost=/opt/factory/run.sh --cleanup %i
+# Worst case: 3 agent rounds x 300 min (AGENT_TIMEOUT) + 3 verify rounds x 60 min, plus a wait
+# for the merge lock.
+TimeoutStartSec=20h
+TimeoutStopSec=60

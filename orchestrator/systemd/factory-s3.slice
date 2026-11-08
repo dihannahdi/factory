@@ -1,0 +1,7 @@
+[Unit]
+Description=factory lane 3 sandboxes
+Before=slices.target
+
+# No limits of its own: the per-sandbox limits are in sandbox.sh, the shared ones in factory.slice.
+# This file exists so the nesting under factory.slice is declared, not inferred.
+[Slice]

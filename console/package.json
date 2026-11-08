@@ -1,0 +1,12 @@
+{
+  "name": "factory-console",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "factory console backend (no runtime dependencies, Node built-ins only)",
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test \"test/*.test.mjs\""
+  }
+}

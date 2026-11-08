@@ -1,0 +1,6 @@
+{
+ "id": "1792130000-deploy",
+ "reason": "deploy 1a2b3c4 failed (failure)",
+ "at": 1792130003,
+ "issue_url": "https://github.com/acme/shop/issues/150"
+}

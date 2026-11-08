@@ -1,0 +1,45 @@
+{
+ "v": 1,
+ "slot": 1,
+ "run_id": "3f9a1c7e5b2d4e6f8a0b1c2d3e4f5a6b",
+ "state": "running",
+ "stage": "build",
+ "sub": "complete 2/4",
+ "issue": {
+  "n": 24,
+  "title": "[ELE-01] Gift cards: issue and redeem",
+  "tag": "ELE-01",
+  "family": "ELE",
+  "url": "https://github.com/acme/shop/issues/24"
+ },
+ "pr": null,
+ "model": "opencode/deepseek-v4.1-flash-free",
+ "session": "ses_ebcb87204ffeiYQE3LcxYNhHmu",
+ "turn": {
+  "phase": "complete2",
+  "started": 1792129783,
+  "events": "/var/log/factory/issue-24-20261016T055517Z-s1/complete2-0.jsonl"
+ },
+ "stage_started": 1792128223,
+ "issue_started": 1792127717,
+ "tokens": {
+  "input": 161234,
+  "output": 21877,
+  "reasoning": 10945,
+  "cache_read": 4011223
+ },
+ "requirements": {
+  "total": 9,
+  "done": 6
+ },
+ "ci": null,
+ "steer": {
+  "pending": null,
+  "last": null
+ },
+ "interrupt": null,
+ "note": "",
+ "effective_agents": 2,
+ "log_dir": "/var/log/factory/issue-24-20261016T055517Z-s1",
+ "updated": 1792130120
+}

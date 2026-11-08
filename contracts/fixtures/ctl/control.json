@@ -1,0 +1,21 @@
+{
+ "v": 1,
+ "agents": 2,
+ "models": [
+  "opencode/deepseek-v4.1-flash-free",
+  "opencode/space-bunny-free"
+ ],
+ "model_mode": "ordered",
+ "paused": false,
+ "queue": [
+  {
+   "n": 37,
+   "at": "2026-10-16T05:00:00Z"
+  }
+ ],
+ "skip": [
+  76
+ ],
+ "resume_ack": null,
+ "updated_at": "2026-10-16T05:00:00Z"
+}

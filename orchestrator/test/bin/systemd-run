@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Test stub: records the call (one line, arguments separated by spaces) and succeeds.
+if [[ -n ${FAKE_SYSTEMD_RUN_LOG:-} ]]; then echo "$*" >> "$FAKE_SYSTEMD_RUN_LOG"; fi
+exit "${FAKE_SYSTEMD_RUN_RC:-0}"

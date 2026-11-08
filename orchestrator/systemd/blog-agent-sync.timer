@@ -1,0 +1,11 @@
+[Unit]
+Description=Run blog-agent sync every minute
+
+[Timer]
+# Offset from the first instance's 30 s, so the two syncs do not start in the same second.
+OnBootSec=45s
+OnUnitActiveSec=60s
+AccuracySec=1s
+
+[Install]
+WantedBy=timers.target

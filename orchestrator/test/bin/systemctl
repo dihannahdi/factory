@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Test stub. `show` answers from FAKE_ACTIVE / FAKE_INV; everything else is logged.
+if [[ ${1:-} == show ]]; then
+  if [[ -n ${FAKE_SYSTEMCTL_SHOW_LOG:-} ]]; then echo "$*" >> "$FAKE_SYSTEMCTL_SHOW_LOG"; fi
+  case "$*" in
+    *ActiveState*) echo "${FAKE_ACTIVE:-inactive}" ;;
+    *InvocationID*) echo "${FAKE_INV:-}" ;;
+  esac
+  exit 0
+fi
+if [[ -n ${FAKE_SYSTEMCTL_LOG:-} ]]; then echo "$*" >> "$FAKE_SYSTEMCTL_LOG"; fi
+# kill/stop <unit>: tell fake-sandbox.sh that its unit is gone (see fake_sleep there).
+if [[ -n ${FAKE_KILL_DIR:-} && ( ${1:-} == kill || ${1:-} == stop ) ]]; then
+  mkdir -p "$FAKE_KILL_DIR" && : > "$FAKE_KILL_DIR/${*: -1}"
+fi
+exit 0

@@ -1,0 +1,24 @@
+{
+  "_": "Model id grammar (SCHEMA section 0). Every implementation that validates a model id is tested against this file: console/test/unit.test.mjs (MODEL_RE, normalizeControl) and orchestrator/test/t_model_ids.sh (valid_model, control_validate).",
+  "valid": [
+    "opencode/deepseek-v4.1-flash-free",
+    "opencode/big-pickle",
+    "opencode-go/deepseek-v4.1-flash",
+    "opencode-go@2/deepseek-v4.1-flash",
+    "opencode-go@12/glm-5.3",
+    "opencode/a"
+  ],
+  "invalid": [
+    "",
+    "deepseek-v4.1-flash",
+    "opencode/",
+    "opencode@2/deepseek-v4.1-flash-free",
+    "opencode-go@/deepseek-v4.1-flash",
+    "opencode-go@x/deepseek-v4.1-flash",
+    "opencode-go@2",
+    "opencode-go/Deepseek",
+    "opencode-go/-dash-first",
+    "anthropic/claude",
+    "opencode-go/deepseek v4"
+  ]
+}

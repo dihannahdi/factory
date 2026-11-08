@@ -197,7 +197,9 @@ async function demo(argv) {
   say(`  ${err.bold("factory demo")} ${err.dim("· simulated lanes, nothing touches GitHub or a model")}`);
   say();
   say(`  open    ${err.cyan(url)}${open ? err.dim("  (opening your browser)") : ""}`);
-  say(`  watch   ${err.bold("factory status --demo --watch")}  ${err.dim("in another terminal")}`);
+  // Started through `npm run demo` (a fresh clone): `factory` is not on PATH yet, so say what works.
+  const watchCmd = process.env.npm_lifecycle_event ? "npm run status -- --demo --watch" : "factory status --demo --watch";
+  say(`  watch   ${err.bold(watchCmd)}  ${err.dim("in another terminal")}`);
   say(`  stop    ${err.bold("Ctrl-C")}`);
   say();
   say(err.dim("  things to try: pause the line, queue an issue from the map, steer a lane, stop one."));

@@ -35,10 +35,10 @@ Pause the line, queue an issue from the map, steer a lane. Nothing leaves your m
 In a second terminal:
 
 ```bash
-node bin/factory.mjs status --demo --watch
+npm run status -- --demo --watch
 ```
 
-`npm link` puts `factory` on your PATH so you can drop the `node bin/factory.mjs`.
+`npm link` puts `factory` on your PATH, so this becomes `factory status --demo --watch`.
 
 ## Run it on your repository
 
